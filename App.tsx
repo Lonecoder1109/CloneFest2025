@@ -4,7 +4,6 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Timeline } from './components/Timeline';
 import { Footer } from './components/Footer';
-import { GridBackground } from './components/GridBackground';
 import { Auth } from './components/Auth';
 
 const App: React.FC = () => {
@@ -15,7 +14,6 @@ const App: React.FC = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-slate-900 text-slate-50">
-      <GridBackground />
       {view === 'main' ? (
         <div key="main" className="relative z-10 w-full">
           <Header onNavigateToAuth={handleNavigateToAuth} />
