@@ -1,4 +1,5 @@
 import React from 'react';
+import BlurText from './BlurText';
 
 interface HeroProps {
   onNavigateToAuth: () => void;
@@ -7,12 +8,22 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onNavigateToAuth }) => {
   return (
     <section className="relative z-10 py-32 md:py-48 text-center">
-      <h1 className="font-orbitron text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-tight">
-        Revamp Legacy. 
-        <span className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 mt-2 md:mt-4">
-           Build the Future.
-        </span>
-      </h1>
+      <BlurText
+        text="Revamp Legacy."
+        delay={250}
+        animateBy="words"
+        direction="top"
+        gradientWords={["Build", "Future"]}
+        className="font-orbitron text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-tight"
+      />
+      <BlurText
+        text="Build the Future."
+        delay={250}
+        animateBy="words"
+        direction="top"
+        gradientWords={["Build", "Future"]}
+        className="font-orbitron text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-tight"
+      />
       <p className="mt-8 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">
         Join CloneFest 2025, a 3-week coding marathon to transform legacy systems into modern, full-stack applications. Showcase your skills, learn deployment, and make your mark in the open-source world.
       </p>
