@@ -5,6 +5,7 @@ import { About } from './components/About';
 import { Timeline } from './components/Timeline';
 import { Footer } from './components/Footer';
 import { Auth } from './components/Auth';
+import Squares from './components/Squares';
 
 const App: React.FC = () => {
   const [view, setView] = useState<'main' | 'auth'>('main');
@@ -13,7 +14,14 @@ const App: React.FC = () => {
   const handleNavigateHome = () => setView('main');
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden bg-slate-900 text-slate-50">
+    <div className="relative min-h-screen w-full overflow-x-hidden text-slate-50">
+      <Squares 
+        speed={0.5} 
+        squareSize={40}
+        direction='diagonal'
+        borderColor='#334155'
+        hoverFillColor='#06b6d4'
+      />
       {view === 'main' ? (
         <div key="main" className="relative z-10 w-full">
           <Header onNavigateToAuth={handleNavigateToAuth} />

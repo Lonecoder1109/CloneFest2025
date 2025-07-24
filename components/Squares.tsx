@@ -17,11 +17,11 @@ interface SquaresProps {
 }
 
 const Squares: React.FC<SquaresProps> = ({
-  direction = "right",
-  speed = 1,
-  borderColor = "#999",
+  direction = "diagonal",
+  speed = 0.5,
+  borderColor = "#334155", // slate-700
   squareSize = 40,
-  hoverFillColor = "#222",
+  hoverFillColor = "#06b6d4", // cyan-500
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const requestRef = useRef<number | null>(null);
@@ -80,8 +80,8 @@ const Squares: React.FC<SquaresProps> = ({
         canvas.height / 2,
         Math.sqrt(canvas.width ** 2 + canvas.height ** 2) / 2
       );
-      gradient.addColorStop(0, "rgba(0, 0, 0, 0)");
-      gradient.addColorStop(1, "#060010");
+      gradient.addColorStop(0, "rgba(15, 23, 42, 0)"); // transparent slate-900
+      gradient.addColorStop(1, "rgba(15, 23, 42, 0.8)"); // semi-transparent slate-900
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
