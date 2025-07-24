@@ -17,8 +17,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ date, title, description, i
         </div>
         <div className="pb-16 bg-slate-800/10 backdrop-blur-sm border border-slate-700/20 rounded-xl p-6 hover:bg-slate-800/20 hover:border-slate-600/30 transition-all duration-300 shadow-lg hover:shadow-xl">
             <p className="text-sm font-semibold text-cyan-400 mb-1">{date}</p>
-            <h4 className="text-xl font-bold text-white mb-2">{title}</h4>
-            <p className="text-slate-400">{description}</p>
+            <h4 className="font-orbitron text-xl font-bold text-white mb-2 uppercase tracking-wide">{title}</h4>
+            <p className="font-inter text-slate-400 leading-relaxed">{description}</p>
         </div>
     </div>
 );

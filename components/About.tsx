@@ -13,8 +13,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) =
         <div className="mb-4 inline-flex items-center justify-center h-12 w-12 rounded-full bg-cyan-900/30 backdrop-blur-sm border border-cyan-500/20 text-cyan-400 shadow-lg">
             {icon}
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-        <p className="text-slate-400">{description}</p>
+        <h3 className="font-orbitron text-xl font-bold text-white mb-2 uppercase tracking-wide">{title}</h3>
+        <p className="font-inter text-slate-400 leading-relaxed">{description}</p>
     </div>
 );
 
