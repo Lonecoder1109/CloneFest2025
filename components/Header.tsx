@@ -3,8 +3,8 @@ import ScrambledText from './ScrambledText';
 
 const Logo: React.FC = () => (
     <div className="flex items-center gap-4">
-        <img src="/public/logos/coding-club.png" alt="Coding Club Logo" className="h-10 w-auto" />
-        <img src="/public/logos/rvce.png" alt="RV College of Engineering Logo" className="h-10 w-auto" />
+        <img src="/logos/coding-club.png" alt="Coding Club Logo" className="h-12 w-auto" />
+                        <img src="/logos/rvce.png" alt="RV College of Engineering Logo" className="h-12 w-auto" />
         <span className="font-orbitron text-xl font-bold tracking-wider text-white">CLONEFEST</span>
     </div>
 );
