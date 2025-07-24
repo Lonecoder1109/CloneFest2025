@@ -1,5 +1,6 @@
 import React from 'react';
 import BlurText from './BlurText';
+import ScrambledText from './ScrambledText';
 
 interface HeroProps {
   onNavigateToAuth: () => void;
@@ -24,10 +25,16 @@ export const Hero: React.FC<HeroProps> = ({ onNavigateToAuth }) => {
         gradientWords={["Build", "Future"]}
         className="font-orbitron text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-tight"
       />
-      <p className="mt-8 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">
+      <ScrambledText
+        className="mt-8 max-w-3xl mx-auto text-lg md:text-xl text-slate-300"
+        radius={100}
+        duration={1.2}
+        speed={0.5}
+        scrambleChars=".:"
+      >
         Join CloneFest 2025, a 3-week coding marathon to transform legacy systems into modern, full-stack applications. Showcase your skills, learn deployment, and make your mark in the open-source world.
-      </p>
-      <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+      </ScrambledText>
+      <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
         <button onClick={onNavigateToAuth} className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:from-cyan-400 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-75 transition-all duration-300 transform hover:scale-105">
           Register for CloneFest
         </button>
