@@ -4,14 +4,15 @@ interface TimelineItemProps {
     date: string;
     title: string;
     description: string;
+    number: number;
     isLast?: boolean;
 }
 
-const TimelineItem: React.FC<TimelineItemProps> = ({ date, title, description, isLast = false }) => (
+const TimelineItem: React.FC<TimelineItemProps> = ({ date, title, description, number, isLast = false }) => (
     <div className="relative flex items-start">
         <div className="flex flex-col items-center mr-6">
             <div className="flex-shrink-0 w-8 h-8 rounded-full bg-cyan-500 backdrop-blur-sm border border-cyan-400/20 shadow-lg flex items-center justify-center text-slate-900 font-bold">
-                {date.split(' ')[0][0]}
+                {number}
             </div>
             {!isLast && <div className="w-px h-full bg-gradient-to-b from-slate-700 to-transparent mt-2"></div>}
         </div>
@@ -34,16 +35,25 @@ export const Timeline: React.FC = () => {
             </div>
             <div className="max-w-3xl mx-auto">
                 <TimelineItem
+                    number={1}
+                    date="Registration Ends: 21st Aug"
+                    title="Registration Deadline"
+                    description="Final deadline to register for CloneFest 2025. Make sure you've signed up and are ready for the challenge ahead."
+                />
+                <TimelineItem
+                    number={2}
                     date="31st Aug - 6th Sept"
                     title="Week 1: Project Alpha"
                     description="Kick off CloneFest with the first legacy project. Focus on understanding the existing architecture and planning your revamp strategy."
                 />
                 <TimelineItem
+                    number={3}
                     date="7th Sept - 13th Sept"
                     title="Week 2: Project Beta"
                     description="Tackle the second project. This week introduces more complexity, challenging you to integrate new features and optimize performance."
                 />
                 <TimelineItem
+                    number={4}
                     date="14th Sept - 21st Sept"
                     title="Week 3: Project Gamma & Deployment"
                     description="The final challenge. Finalize your third project and deploy all three applications. Submissions will be judged after this week."

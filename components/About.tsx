@@ -23,11 +23,11 @@ export const About: React.FC = () => {
         <section id="about" className="py-24">
             <div className="text-center mb-16">
                 <BlurText
-                    text="What is CloneFest?"
+                    text="CloneFest 2025"
                     delay={150}
                     animateBy="words"
                     direction="top"
-                    gradientWords={["CloneFest"]}
+                    gradientWords={["CloneFest", "2025"]}
                     className="font-orbitron text-4xl md:text-5xl font-bold text-white uppercase tracking-wider"
                 />
                 <div className="mt-4">
@@ -56,6 +56,87 @@ export const About: React.FC = () => {
                     title="Expert Judging & Recognition"
                     description="Projects are reviewed by senior developers. Top submissions get recognized and have the chance to be pushed as open-source contributions."
                 />
+            </div>
+        </section>
+    );
+}
+
+// Why Participate Section Component
+export const WhyParticipate: React.FC = () => {
+    return (
+        <section id="why-participate" className="py-24 bg-slate-900/20">
+            <div className="text-center mb-16">
+                <BlurText
+                    text="Why Participate?"
+                    delay={150}
+                    animateBy="words"
+                    direction="top"
+                    gradientWords={["Why", "Participate"]}
+                    className="font-orbitron text-4xl md:text-5xl font-bold text-white uppercase tracking-wider"
+                />
+                <div className="mt-4">
+                    <BlurText
+                        text="Join the ultimate coding challenge with exciting rewards and real-world experience."
+                        delay={100}
+                        animateBy="words"
+                        direction="top"
+                        className="max-w-2xl mx-auto text-lg text-slate-300"
+                    />
+                </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <FeatureCard 
+                    icon={<svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>}
+                    title="Skill Development"
+                    description="Master modern full-stack development by working with real legacy codebases and transforming them into production-ready applications."
+                />
+                <FeatureCard 
+                    icon={<svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>}
+                    title="Career Growth"
+                    description="Build an impressive portfolio with three deployed full-stack projects that showcase your ability to modernize legacy systems."
+                />
+                <FeatureCard 
+                    icon={<svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>}
+                    title="Recognition"
+                    description="Get your work reviewed by industry experts and have top submissions featured as open-source contributions to the community."
+                />
+                <FeatureCard 
+                    icon={<svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>}
+                    title="Mentorship"
+                    description="Learn from experienced developers who will guide you through deployment processes and industry best practices."
+                />
+            </div>
+
+            {/* Prize Pool Section */}
+            <div className="max-w-4xl mx-auto">
+                <div className="bg-gradient-to-r from-cyan-500/10 to-blue-600/10 backdrop-blur-xl border border-cyan-400/20 rounded-2xl p-8 text-center shadow-2xl">
+                    <div className="mb-6">
+                        <h3 className="font-orbitron text-3xl md:text-4xl font-bold text-white mb-4 uppercase tracking-wide">
+                            Prize Pool
+                        </h3>
+                        <div className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 font-orbitron">
+                            ₹6,000
+                        </div>
+                    </div>
+                    <p className="font-inter text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+                        Compete for exciting cash prizes! The top performers will share the prize pool based on their project quality, innovation, and successful deployment.
+                    </p>
+                    <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/40 rounded-lg p-4">
+                            <div className="text-yellow-400 text-2xl font-bold">🥇 1st Place</div>
+                            <div className="text-white font-semibold mt-2">₹3,000</div>
+                        </div>
+                        <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/40 rounded-lg p-4">
+                            <div className="text-slate-300 text-2xl font-bold">🥈 2nd Place</div>
+                            <div className="text-white font-semibold mt-2">₹2,000</div>
+                        </div>
+                        <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/40 rounded-lg p-4">
+                            <div className="text-orange-400 text-2xl font-bold">🥉 3rd Place</div>
+                            <div className="text-white font-semibold mt-2">₹1,000</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );

@@ -5,9 +5,20 @@
   font-family: monospace;
   font-size: clamp(10px, 2vw, 18px);
   color: #fff;
+  line-height: 1.6;
+}
+
+.text-block p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+  margin: 0;
+  padding: 0;
 }
 
 .char {
   will-change: transform;
   display: inline-block;
+  white-space: pre;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { About } from './components/About';
+import { About, WhyParticipate } from './components/About';
 import { Timeline } from './components/Timeline';
 import { Footer } from './components/Footer';
 import { Auth } from './components/Auth';
@@ -28,6 +28,7 @@ const App: React.FC = () => {
           <main className="relative z-10 container mx-auto px-6 md:px-8 pt-20">
             <Hero onNavigateToAuth={handleNavigateToAuth} />
             <About />
+            <WhyParticipate />
             <Timeline />
           </main>
           <Footer />

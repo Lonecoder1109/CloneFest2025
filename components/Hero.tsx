@@ -10,19 +10,11 @@ export const Hero: React.FC<HeroProps> = ({ onNavigateToAuth }) => {
   return (
     <section className="relative z-10 py-32 md:py-48 text-center">
       <BlurText
-        text="Revamp Legacy."
+        text="CloneFest 2025"
         delay={250}
         animateBy="words"
         direction="top"
-        gradientWords={["Build", "Future"]}
-        className="font-orbitron text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-tight"
-      />
-      <BlurText
-        text="Build the Future."
-        delay={250}
-        animateBy="words"
-        direction="top"
-        gradientWords={["Build", "Future"]}
+        gradientWords={["CloneFest", "2025"]}
         className="font-orbitron text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-tight"
       />
       <ScrambledText
