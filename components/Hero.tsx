@@ -38,7 +38,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigateToAuth }) => {
         <button onClick={onNavigateToAuth} className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:from-cyan-400 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-75 transition-all duration-300 transform hover:scale-105">
           Register for CloneFest
         </button>
-        <a href="#about" className="w-full sm:w-auto px-8 py-4 bg-slate-800/50 border border-slate-700 text-white font-semibold rounded-lg hover:bg-slate-700 transition-colors duration-300">
+        <a href="#about" className="w-full sm:w-auto px-8 py-4 bg-slate-800/20 backdrop-blur-xl border border-slate-700/40 text-white font-semibold rounded-lg hover:bg-slate-700/30 hover:border-slate-600/60 transition-all duration-300 hover:scale-105 shadow-lg">
           Learn More
         </a>
       </div>

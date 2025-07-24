@@ -8,7 +8,7 @@ const FormInput: React.FC<{ id: string; name: string; type: string; placeholder:
             id={id} 
             name={name} 
             placeholder={placeholder}
-            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-shadow"
+            className="w-full bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500/50 transition-all duration-300"
             required={required}
         />
     </div>
@@ -30,7 +30,7 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                 <span className="sr-only">Back to Home</span>
             </button>
             <div className="w-full max-w-md">
-                <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8 md:p-12 shadow-2xl">
+                <div className="bg-slate-800/20 backdrop-blur-2xl border border-slate-700/30 rounded-2xl p-8 md:p-12 shadow-2xl hover:bg-slate-800/25 transition-all duration-300">
                     <div className="mb-8 text-center">
                         <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-white uppercase">
                             {mode === 'signup' ? 'Join CloneFest 2025' : 'Welcome Back'}
@@ -40,11 +40,11 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                         </p>
                     </div>
 
-                    <div className="flex justify-center bg-slate-900/50 rounded-lg p-1 mb-8">
-                        <button onClick={() => setMode('signup')} className={`w-1/2 py-2.5 rounded-md text-sm font-bold transition-colors ${mode === 'signup' ? 'bg-cyan-500 text-slate-900' : 'text-slate-300 hover:bg-slate-700/50'}`}>
+                    <div className="flex justify-center bg-slate-900/30 backdrop-blur-sm border border-slate-700/20 rounded-lg p-1 mb-8">
+                        <button onClick={() => setMode('signup')} className={`w-1/2 py-2.5 rounded-md text-sm font-bold transition-colors ${mode === 'signup' ? 'bg-cyan-500 text-slate-900' : 'text-slate-300 hover:bg-slate-700/30'}`}>
                             Sign Up
                         </button>
-                        <button onClick={() => setMode('login')} className={`w-1/2 py-2.5 rounded-md text-sm font-bold transition-colors ${mode === 'login' ? 'bg-cyan-500 text-slate-900' : 'text-slate-300 hover:bg-slate-700/50'}`}>
+                        <button onClick={() => setMode('login')} className={`w-1/2 py-2.5 rounded-md text-sm font-bold transition-colors ${mode === 'login' ? 'bg-cyan-500 text-slate-900' : 'text-slate-300 hover:bg-slate-700/30'}`}>
                             Login
                         </button>
                     </div>

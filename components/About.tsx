@@ -9,8 +9,8 @@ interface FeatureCardProps {
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => (
-    <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8 h-full">
-        <div className="mb-4 inline-flex items-center justify-center h-12 w-12 rounded-full bg-cyan-900/50 text-cyan-400">
+    <div className="bg-slate-800/20 backdrop-blur-xl border border-slate-700/30 rounded-2xl p-8 h-full shadow-xl hover:bg-slate-800/30 hover:border-slate-600/50 transition-all duration-300 hover:shadow-2xl hover:scale-105">
+        <div className="mb-4 inline-flex items-center justify-center h-12 w-12 rounded-full bg-cyan-900/30 backdrop-blur-sm border border-cyan-500/20 text-cyan-400 shadow-lg">
             {icon}
         </div>
         <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
