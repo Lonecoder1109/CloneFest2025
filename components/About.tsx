@@ -1,5 +1,6 @@
 import React from 'react';
 import { CodeBracketIcon, CloudArrowUpIcon, UserGroupIcon } from './icons/FeatureIcons';
+import CountUp from './CountUp';
 import BlurText from './BlurText';
 
 interface FeatureCardProps {
@@ -23,7 +24,7 @@ export const About: React.FC = () => {
         <section id="about" className="py-24">
             <div className="text-center mb-16">
                 <BlurText
-                    text="CloneFest 2025"
+                    text="What is CloneFest 2025?"
                     delay={150}
                     animateBy="words"
                     direction="top"
@@ -76,11 +77,11 @@ export const WhyParticipate: React.FC = () => {
                 />
                 <div className="mt-4">
                     <BlurText
-                        text="Join the ultimate coding challenge with exciting rewards and real-world experience."
+                        text="Build major projects for your resume, and get your best clones featured on the Coding Club GitHub account with credits to your team."
                         delay={100}
                         animateBy="words"
                         direction="top"
-                        className="max-w-2xl mx-auto text-lg text-slate-300"
+                        className="max-w-2xl mx-auto text-lg text-cyan-300"
                     />
                 </div>
             </div>
@@ -111,31 +112,15 @@ export const WhyParticipate: React.FC = () => {
             {/* Prize Pool Section */}
             <div className="max-w-4xl mx-auto">
                 <div className="bg-gradient-to-r from-cyan-500/10 to-blue-600/10 backdrop-blur-xl border border-cyan-400/20 rounded-2xl p-8 text-center shadow-2xl">
-                    <div className="mb-6">
-                        <h3 className="font-orbitron text-3xl md:text-4xl font-bold text-white mb-4 uppercase tracking-wide">
-                            Prize Pool
-                        </h3>
-                        <div className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 font-orbitron">
-                            ₹6,000
-                        </div>
+                    <h3 className="font-orbitron text-3xl md:text-4xl font-bold text-white mb-4 uppercase tracking-wide">
+                        Prize Pool
+                    </h3>
+                    <div className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 font-orbitron mb-4 flex items-center justify-center">
+                        ₹<span className="inline-block"><CountUp to={6000} duration={2.5} separator="," className="font-orbitron" /></span>
                     </div>
                     <p className="font-inter text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
-                        Compete for exciting cash prizes! The top performers will share the prize pool based on their project quality, innovation, and successful deployment.
+                        Compete for exciting cash prizes! The top performers will share the grand prize pool based on their project quality, innovation, and successful deployment.
                     </p>
-                    <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                        <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/40 rounded-lg p-4">
-                            <div className="text-yellow-400 text-2xl font-bold">🥇 1st Place</div>
-                            <div className="text-white font-semibold mt-2">₹3,000</div>
-                        </div>
-                        <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/40 rounded-lg p-4">
-                            <div className="text-slate-300 text-2xl font-bold">🥈 2nd Place</div>
-                            <div className="text-white font-semibold mt-2">₹2,000</div>
-                        </div>
-                        <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/40 rounded-lg p-4">
-                            <div className="text-orange-400 text-2xl font-bold">🥉 3rd Place</div>
-                            <div className="text-white font-semibold mt-2">₹1,000</div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

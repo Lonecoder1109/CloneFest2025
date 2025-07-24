@@ -17,25 +17,31 @@ export const Hero: React.FC<HeroProps> = ({ onNavigateToAuth }) => {
         gradientWords={["CloneFest", "2025"]}
         className="font-orbitron text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-tight"
       />
-      <ScrambledText
-        className="mt-8 max-w-3xl mx-auto text-lg md:text-xl text-slate-300"
-        radius={100}
-        duration={1.2}
-        speed={0.5}
-        scrambleChars=".:"
-      >
-        Join CloneFest 2025, a 3-week coding marathon to transform legacy systems into modern, full-stack applications. Showcase your skills, learn deployment, and make your mark in the open-source world.
-      </ScrambledText>
+      <div className="mt-8 max-w-3xl mx-auto text-center">
+        <div className="mb-2 text-lg md:text-xl font-bold text-white font-orbitron leading-tight">
+          Join CloneFest 2025, a 3-week coding marathon to transform legacy systems into modern, full-stack applications.
+        </div>
+        <div className="mb-2 text-lg md:text-xl font-bold text-cyan-400 font-orbitron leading-tight">
+          Win from a ₹<span className="inline-block"><CountUp to={6000} duration={2.5} separator="," className="font-orbitron" /></span> prize pool — <span className="text-white">build major projects for your resume.</span>
+        </div>
+        <div className="text-lg md:text-xl font-bold text-white font-orbitron leading-tight">
+          Best clones will be featured on the Coding Club GitHub account with credits to your team.
+        </div>
+      </div>
       <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <button onClick={onNavigateToAuth} className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:from-cyan-400 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-75 transition-all duration-300 transform hover:scale-105">
+        <ScrambledText
+          className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:from-cyan-400 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-75 transition-all duration-300 transform hover:scale-105 text-2xl"
+          radius={100}
+          duration={1.2}
+          speed={0.5}
+          scrambleChars=".:"
+        >
           Register for CloneFest
-        </button>
-        <a href="#about" className="w-full sm:w-auto px-8 py-4 bg-slate-800/20 backdrop-blur-xl border border-slate-700/40 text-white font-semibold rounded-lg hover:bg-slate-700/30 hover:border-slate-600/60 transition-all duration-300 hover:scale-105 shadow-lg">
-          Learn More
-        </a>
+        </ScrambledText>
       </div>
     </section>
   );
 };
+import CountUp from './CountUp';
 
 
