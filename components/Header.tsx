@@ -28,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigateToAuth }) => {
 
     return (
         <>
-            <header className="sticky top-0 z-50 w-full bg-slate-900/60 backdrop-blur-lg border-b border-slate-700/50">
+            <header className="fixed top-0 z-50 w-full bg-slate-900/70 backdrop-blur-xl border-b border-slate-700/30 shadow-lg">
                 <div className="container mx-auto flex h-20 items-center justify-between px-6 md:px-8">
                     <Logo />
                     <nav className="hidden md:flex items-center space-x-8">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { CodeBracketIcon, CloudArrowUpIcon, UserGroupIcon } from './icons/FeatureIcons';
+import BlurText from './BlurText';
 
 interface FeatureCardProps {
     icon: React.ReactNode;
@@ -21,10 +22,23 @@ export const About: React.FC = () => {
     return (
         <section id="about" className="py-24">
             <div className="text-center mb-16">
-                <h2 className="font-orbitron text-4xl md:text-5xl font-bold text-white uppercase tracking-wider">What is CloneFest?</h2>
-                <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-300">
-                    A hands-on competition designed to bridge the gap between theory and real-world application development.
-                </p>
+                <BlurText
+                    text="What is CloneFest?"
+                    delay={150}
+                    animateBy="words"
+                    direction="top"
+                    gradientWords={["CloneFest"]}
+                    className="font-orbitron text-4xl md:text-5xl font-bold text-white uppercase tracking-wider"
+                />
+                <div className="mt-4">
+                    <BlurText
+                        text="A hands-on competition designed to bridge the gap between theory and real-world application development."
+                        delay={100}
+                        animateBy="words"
+                        direction="top"
+                        className="max-w-2xl mx-auto text-lg text-slate-300"
+                    />
+                </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <FeatureCard 

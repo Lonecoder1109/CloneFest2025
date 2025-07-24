@@ -19,7 +19,7 @@ const App: React.FC = () => {
       {view === 'main' ? (
         <div key="main" className="relative z-10 w-full">
           <Header onNavigateToAuth={handleNavigateToAuth} />
-          <main className="relative z-10 container mx-auto px-6 md:px-8">
+          <main className="relative z-10 container mx-auto px-6 md:px-8 pt-20">
             <Hero onNavigateToAuth={handleNavigateToAuth} />
             <About />
             <Timeline />
