@@ -4,12 +4,13 @@ const fs = require("fs");
 const csvParser = require("csv-parser");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const path = require("path"); // ADD THIS MISSING IMPORT
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001; // Use environment PORT for deployment
 const CSV_FILE = "users.csv";
 
-// CORS middleware
+// CORS middleware (KEEP ONLY ONE)
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -34,7 +35,7 @@ if (!fs.existsSync(CSV_FILE)) {
 // In-memory OTP storage (in production, use Redis or database)
 const otpStorage = new Map();
 
-// Email configuration - CORRECTED: createTransport (not createTransporter)
+// Email configuration
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -61,14 +62,13 @@ app.get("/test", (req, res) => {
 });
 
 // Registration endpoint
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   try {
-    console.log("Received registration data:", req.body); // Debug log
+    console.log("Received registration data:", req.body);
 
     const { fullName, email, github, password } = req.body;
 
     console.log("Individual fields:", {
-      // Debug log
       fullName: fullName,
       email: email,
       github: github,
@@ -116,10 +116,10 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Login endpoint
-app.post("/login", async (req, res) => {
+// Login endpoint - ADD /api PREFIX
+app.post("/api/login", async (req, res) => {
   try {
-    console.log("Login attempt:", req.body.email); // Debug log
+    console.log("Login attempt:", req.body.email);
 
     const { email, password } = req.body;
 
@@ -154,8 +154,8 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Forgot password endpoint
-app.post("/forgot-password", async (req, res) => {
+// Forgot password endpoint - ADD /api PREFIX
+app.post("/api/forgot-password", async (req, res) => {
   try {
     const { email } = req.body;
 
@@ -202,8 +202,8 @@ app.post("/forgot-password", async (req, res) => {
   }
 });
 
-// Verify OTP endpoint
-app.post("/verify-otp", (req, res) => {
+// Verify OTP endpoint - ADD /api PREFIX
+app.post("/api/verify-otp", (req, res) => {
   try {
     const { email, otp } = req.body;
 
@@ -240,8 +240,8 @@ app.post("/verify-otp", (req, res) => {
   }
 });
 
-// Reset password endpoint
-app.post("/reset-password", async (req, res) => {
+// Reset password endpoint - ADD /api PREFIX
+app.post("/api/reset-password", async (req, res) => {
   try {
     const { email, resetToken, newPassword } = req.body;
 
@@ -296,6 +296,15 @@ app.post("/reset-password", async (req, res) => {
   }
 });
 
+// Serve static files from React build - MOVE TO END
+app.use(express.static(path.join(__dirname, "../dist")));
+
+// Serve React app for all non-API routes - MOVE TO END
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist", "index.html"));
+});
+
+// SINGLE app.listen() call
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
