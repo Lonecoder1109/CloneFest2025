@@ -1,0 +1,12 @@
+{
+  "name": "clonefest-server",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2",
+    "csv-parser": "^3.0.0",
+    "nodemailer": "^6.9.7"
+  }
+}
