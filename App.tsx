@@ -10,10 +10,9 @@ import { AdminDashboard } from "./components/admin/AdminDashboard";
 import Squares from "./components/Squares";
 
 const App: React.FC = () => {
-  // State management for different views
-  const [view, setView] = useState<
-    "main" | "auth" | "admin-login" | "admin-dashboard"
-  >("main");
+  const [view, setView] = useState<"main" | "auth" | "admin-login" | "admin-dashboard">("main");
+
+
   const [adminToken, setAdminToken] = useState<string | null>(null);
 
   // Navigation handlers
@@ -21,49 +20,53 @@ const App: React.FC = () => {
   const handleNavigateHome = () => setView("main");
   const handleNavigateToAdmin = () => setView("admin-login");
 
-  // Admin authentication handlers
+  // Admin login success handler
   const handleAdminLogin = (token: string) => {
     setAdminToken(token);
     setView("admin-dashboard");
   };
 
+  // Admin logout
   const handleAdminLogout = () => {
     setAdminToken(null);
     setView("main");
   };
 
-  // Render admin login view
+  // Admin login view
   if (view === "admin-login") {
     return (
-      <AdminLogin onAdminLogin={handleAdminLogin} onBack={handleNavigateHome} />
+      <AdminLogin
+        onAdminLogin={handleAdminLogin}
+        onBack={handleNavigateHome}
+      />
     );
   }
 
-  // Render admin dashboard view
+  // Admin dashboard view
   if (view === "admin-dashboard" && adminToken) {
     return (
       <AdminDashboard adminToken={adminToken} onLogout={handleAdminLogout} />
     );
   }
 
-  // Render authentication view
+  // Auth view (signup / login)
   if (view === "auth") {
     return <Auth onNavigateHome={handleNavigateHome} />;
   }
 
-  // Render main application view
+  // Main site landing view
   return (
     <div className="relative min-h-screen bg-slate-950 text-white overflow-hidden">
-      {/* Background animation component */}
-      <Squares 
-        speed={0.5} 
+      {/* Animated background */}
+      <Squares
+        speed={0.5}
         squareSize={40}
-        direction='diagonal'
-        borderColor='rgba(148, 163, 184, 0.15)'
-        hoverFillColor='rgba(148, 163, 184, 0.05)'
+        direction="diagonal"
+        borderColor="rgba(148, 163, 184, 0.15)"
+        hoverFillColor="rgba(148, 163, 184, 0.05)"
       />
 
-      {/* Main application components */}
+      {/* Main site content */}
       <div className="relative z-10">
         <Header
           onNavigateToAuth={handleNavigateToAuth}

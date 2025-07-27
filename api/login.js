@@ -1,4 +1,5 @@
 import admin from "firebase-admin";
+import bcrypt from "bcryptjs";
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -29,32 +30,36 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { email, password } = req.body;
+    const { teamName, teamPassword } = req.body;
 
-    if (!email || !password) {
-      return res
-        .status(400)
-        .json({ message: "Email and password are required." });
+    if (!teamName || !teamPassword) {
+      return res.status(400).json({ message: "Team name and password are required." });
     }
 
-    const userSnapshot = await db
-      .collection("users")
-      .where("email", "==", email)
-      .where("password", "==", password)
+    const teamSnapshot = await db
+      .collection("teams")
+      .where("teamName", "==", teamName.trim())
       .get();
 
-    if (userSnapshot.empty) {
-      return res.status(401).json({ message: "Invalid credentials." });
+    if (teamSnapshot.empty) {
+      return res.status(401).json({ message: "Invalid team name or password." });
     }
 
-    const user = userSnapshot.docs[0].data();
+    const teamDoc = teamSnapshot.docs[0];
+    const teamData = teamDoc.data();
 
-    res.status(200).json({
+    const passwordMatch = await bcrypt.compare(teamPassword, teamData.teamPassword);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ message: "Invalid team name or password." });
+    }
+
+    return res.status(200).json({
       message: "Login successful.",
-      user: {
-        fullName: user.fullName,
-        email: user.email,
-        github: user.github,
+      team: {
+        teamName: teamData.teamName,
+        teamLeader: teamData.teamLeader,
+        teamMembers: teamData.teamMembers,
       },
     });
   } catch (error) {

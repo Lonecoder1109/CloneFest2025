@@ -29,13 +29,10 @@ export default async function handler(req, res) {
   );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
+  if (req.method === "OPTIONS") return res.status(200).end();
 
-  if (req.method !== "GET") {
+  if (req.method !== "GET")
     return res.status(405).json({ message: "Method not allowed" });
-  }
 
   try {
     const authHeader = req.headers.authorization;
@@ -50,28 +47,36 @@ export default async function handler(req, res) {
       return res.status(401).json({ message: "Invalid admin token." });
     }
 
-    const snapshot = await db.collection("users").get();
-    const users = [];
+    const snapshot = await db.collection("teams").get();
+    const teams = [];
 
     snapshot.forEach((doc) => {
-      const userData = doc.data();
-      users.push({
+      const data = doc.data();
+      teams.push({
         id: doc.id,
-        fullName: userData.fullName,
-        email: userData.email,
-        github: userData.github,
-        createdAt: userData.createdAt,
+        teamName: data.teamName,
+        teamPassword: data.teamPassword,
+        teamLeaderFullName: data.teamLeader?.fullName || "",
+        teamLeaderEmail: data.teamLeader?.email || "",
+        teamLeaderPhone: data.teamLeader?.phone || "",
+        teamLeaderGithub: data.teamLeader?.github || "",
+        member1: data.teamMembers?.[0]?.fullName || "",
+        member2: data.teamMembers?.[1]?.fullName || "",
+        member3: data.teamMembers?.[2]?.fullName || "",
+        createdAt: data.createdAt,
       });
     });
 
     const format = req.query.format || "json";
 
     if (format === "csv") {
-      const csvHeader = "ID,Full Name,Email,GitHub,Created At\n";
-      const csvRows = users
+      const csvHeader =
+        "ID,Team Name,Team Password,Leader Name,Leader Email,Leader Phone,Leader GitHub,Member 1,Member 2,Member 3,Created At\n";
+
+      const csvRows = teams
         .map(
-          (user) =>
-            `"${user.id}","${user.fullName}","${user.email}","${user.github}","${user.createdAt}"`
+          (team) =>
+            `"${team.id}","${team.teamName}","${team.teamPassword}","${team.teamLeaderFullName}","${team.teamLeaderEmail}","${team.teamLeaderPhone}","${team.teamLeaderGithub}","${team.member1}","${team.member2}","${team.member3}","${team.createdAt}"`
         )
         .join("\n");
 
@@ -80,21 +85,21 @@ export default async function handler(req, res) {
       res.setHeader("Content-Type", "text/csv");
       res.setHeader(
         "Content-Disposition",
-        `attachment; filename="clonefest-users-${
-          new Date().toISOString().split("T")[0]
-        }.csv"`
+        `attachment; filename="clonefest-teams-${new Date()
+          .toISOString()
+          .split("T")[0]}.csv"`
       );
-      res.status(200).send(csv);
+      return res.status(200).send(csv);
     } else {
-      res.status(200).json({
-        message: "Users exported successfully.",
-        totalUsers: users.length,
+      return res.status(200).json({
+        message: "Teams exported successfully.",
+        totalTeams: teams.length,
         exportedAt: new Date().toISOString(),
-        users,
+        teams,
       });
     }
   } catch (error) {
     console.error("Export error:", error);
-    res.status(500).json({ message: "Failed to export users." });
+    return res.status(500).json({ message: "Failed to export teams." });
   }
 }

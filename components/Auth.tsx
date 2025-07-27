@@ -12,6 +12,7 @@ const FormInput: React.FC<{
   <div>
     <label htmlFor={id} className="block text-sm font-bold text-slate-300 mb-2">
       {label}
+      {required && <span className="text-red-500 ml-1">*</span>}
     </label>
     <input
       type={type}
@@ -25,6 +26,7 @@ const FormInput: React.FC<{
   </div>
 );
 
+
 interface AuthProps {
   onNavigateHome: () => void;
 }
@@ -32,24 +34,45 @@ interface AuthProps {
 export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
   const [mode, setMode] = useState<"login" | "signup">("signup");
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    github: "",
-    password: "",
+    teamName: "",
+    teamPassword: "",
+    teamLeader: {
+      fullName: "",
+      email: "",
+      phone: "",
+      github: "",
+    },
+    teamMembers: [{ fullName: "" }, { fullName: "" }, { fullName: "" }],
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name in formData) {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    } else if (name.startsWith("leader-")) {
+      const field = name.replace("leader-", "");
+      setFormData((prev) => ({
+        ...prev,
+        teamLeader: { ...prev.teamLeader, [field]: value },
+      }));
+    } else if (name.startsWith("member-")) {
+      const index = parseInt(name.split("-")[1]);
+      setFormData((prev) => {
+        const updated = [...prev.teamMembers];
+        updated[index].fullName = value;
+        return { ...prev, teamMembers: updated };
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const endpoint = mode === "signup" ? "/register" : "/login";
     const payload =
       mode === "signup"
         ? formData
-        : { email: formData.email, password: formData.password };
+        : { teamName: formData.teamName, teamPassword: formData.teamPassword };
 
     try {
       const response = await fetch(`/api${endpoint}`, {
@@ -60,6 +83,7 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
 
       const data = await response.json();
       alert(data.message);
+
       if (mode === "login" && response.ok) {
         onNavigateHome();
       }
@@ -95,12 +119,12 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
         <div className="bg-slate-800/20 backdrop-blur-2xl border border-slate-700/30 rounded-2xl p-8 md:p-12 shadow-2xl hover:bg-slate-800/25 transition-all duration-300">
           <div className="mb-8 text-center">
             <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-white uppercase">
-              {mode === "signup" ? "Join CloneFest 2025" : "Welcome Back"}
+              {mode === "signup" ? "Join CloneFest 2025" : "Team Login"}
             </h2>
             <p className="text-slate-400 mt-2">
               {mode === "signup"
-                ? "Create an account to begin your journey."
-                : "Login to access your details."}
+                ? "Register to begin your journey."
+                : "Welcome back!"}
             </p>
           </div>
 
@@ -131,65 +155,89 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
             {mode === "signup" ? (
               <>
                 <FormInput
-                  id="fullName"
-                  name="fullName"
+                  id="teamName"
+                  name="teamName"
                   type="text"
-                  placeholder="John Doe"
-                  label="Full Name"
-                  required
-                  onChange={handleInputChange}
+                  placeholder="Team XYZ"
+                  label="Team Name"
+                  onChange={handleChange}
                 />
                 <FormInput
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  label="Email Address"
-                  required
-                  onChange={handleInputChange}
-                />
-                <FormInput
-                  id="github"
-                  name="github"
-                  type="url"
-                  placeholder="https://github.com/johndoe"
-                  label="GitHub Profile URL"
-                  required
-                  onChange={handleInputChange}
-                />
-                <FormInput
-                  id="password"
-                  name="password"
+                  id="teamPassword"
+                  name="teamPassword"
                   type="password"
                   placeholder="••••••••"
-                  label="Password"
-                  required
-                  onChange={handleInputChange}
+                  label="Team Password"
+                  onChange={handleChange}
                 />
+                <FormInput
+                  id="leader-fullName"
+                  name="leader-fullName"
+                  type="text"
+                  placeholder="John Doe"
+                  label="Team Leader Name"
+                  onChange={handleChange}
+                />
+                <FormInput
+                  id="leader-email"
+                  name="leader-email"
+                  type="email"
+                  placeholder="JohnDoe@example.com"
+                  label="Team Leader Email"
+                  onChange={handleChange}
+                />
+                <FormInput
+                  id="leader-phone"
+                  name="leader-phone"
+                  type="tel"
+                  placeholder="xxx-xxx-xxxx"
+                  label="Team Leader Phone"
+                  onChange={handleChange}
+                />
+                <FormInput
+                  id="leader-github"
+                  name="leader-github"
+                  type="url"
+                  placeholder="https://github.com/JohnDoe"
+                  label="GitHub Profile"
+                  onChange={handleChange}
+                />
+                {[0, 1, 2].map((i) => (
+                  <FormInput
+                    key={i}
+                    id={`member-${i}`}
+                    name={`member-${i}`}
+                    type="text"
+                    placeholder={`Member ${i + 1} Name`}
+                    label={`Team Member ${i + 1} ${i < 2 ? "" : "(optional)"}`}
+                    required={i < 2}
+                    onChange={handleChange}
+                  />
+                ))}
                 <button
                   type="submit"
                   className="w-full text-center block px-8 py-4 font-bold rounded-lg transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg hover:from-cyan-400 hover:to-blue-500 transform hover:scale-105"
                 >
-                  Create Account
+                  Create Team Account
                 </button>
               </>
             ) : (
               <>
                 <FormInput
-                  id="login-email"
-                  name="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  label="Email Address"
-                  onChange={handleInputChange}
+                  id="teamName"
+                  name="teamName"
+                  type="text"
+                  placeholder="Team XYZ"
+                  label="Team Name"
+                  onChange={handleChange}
                 />
                 <FormInput
-                  id="login-password"
-                  name="password"
+                  id="teamPassword"
+                  name="teamPassword"
                   type="password"
                   placeholder="••••••••"
-                  label="Password"
-                  onChange={handleInputChange}
+                  label="Team Password"
+                  onChange={handleChange}
                 />
                 <button
                   type="submit"
@@ -197,18 +245,6 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                 >
                   Login
                 </button>
-                <div className="text-center mt-4">
-                  <button
-                    type="button"
-                    className="text-sm text-slate-400 hover:text-cyan-400 transition-colors duration-300 underline"
-                    onClick={() => {
-                      // TODO: Implement forgot password functionality
-                      alert("Forgot password functionality coming soon!");
-                    }}
-                  >
-                    Forgot Password?
-                  </button>
-                </div>
               </>
             )}
           </form>
