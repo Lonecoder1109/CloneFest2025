@@ -1,6 +1,7 @@
 import admin from "firebase-admin";
+import bcrypt from "bcryptjs";
 
-// Initialize Firebase Admin if not already initialized
+// Initialize Firebase Admin SDK
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert({
@@ -14,7 +15,7 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 export default async function handler(req, res) {
-  // Set CORS headers
+  // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -22,49 +23,66 @@ export default async function handler(req, res) {
   );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
+  if (req.method === "OPTIONS") return res.status(200).end();
 
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
   try {
-    const { fullName, email, github, password } = req.body;
+    const {
+      teamName,
+      teamPassword,
+      teamLeader,
+      teamMembers = [],
+    } = req.body;
 
+    // Basic validation
     if (
-      !fullName ||
-      !email ||
-      !github ||
-      !password ||
-      fullName.trim() === "" ||
-      email.trim() === "" ||
-      github.trim() === "" ||
-      password.trim() === ""
+      !teamName?.trim() ||
+      !teamPassword?.trim() ||
+      !teamLeader?.fullName?.trim() ||
+      !teamLeader?.email?.trim() ||
+      !teamLeader?.phone?.trim() ||
+      !teamLeader?.github?.trim() ||
+      !teamMembers[0]?.fullName?.trim() ||
+      !teamMembers[1]?.fullName?.trim()
     ) {
-      return res.status(400).json({ message: "All fields are required." });
+      return res.status(400).json({ message: "All required fields must be filled." });
     }
 
-    const userSnapshot = await db
-      .collection("users")
-      .where("email", "==", email)
+    // Check if team already exists
+    const existing = await db
+      .collection("teams")
+      .where("teamName", "==", teamName.trim())
       .get();
-    if (!userSnapshot.empty) {
-      return res.status(400).json({ message: "User already exists." });
+
+    if (!existing.empty) {
+      return res.status(400).json({ message: "Team name already registered." });
     }
 
-    await db.collection("users").add({
-      fullName: fullName.trim(),
-      email: email.trim(),
-      github: github.trim(),
-      password: password,
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(teamPassword.trim(), 10);
+
+    // Store team with hashed password
+    await db.collection("teams").add({
+      teamName: teamName.trim(),
+      teamPassword: hashedPassword,
+      teamLeader: {
+        fullName: teamLeader.fullName.trim(),
+        email: teamLeader.email.trim(),
+        phone: teamLeader.phone.trim(),
+        github: teamLeader.github.trim(),
+      },
+      teamMembers: teamMembers.map((m) => ({
+        fullName: m.fullName?.trim() || "",
+      })),
       createdAt: new Date().toISOString(),
     });
 
-    res.status(201).json({ message: "User registered successfully." });
+    return res.status(201).json({ message: "Team registered successfully." });
   } catch (error) {
-    console.error("Registration error:", error);
-    res.status(500).json({ message: "Server error occurred." });
+    console.error("Team registration error:", error);
+    return res.status(500).json({ message: "Server error occurred." });
   }
 }
