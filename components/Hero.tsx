@@ -1,5 +1,6 @@
 import React from 'react';
 import BlurText from './BlurText';
+import CountUp from './CountUp';
 import ScrambledText from './ScrambledText';
 
 interface HeroProps {
@@ -37,19 +38,20 @@ export const Hero: React.FC<HeroProps> = ({ onNavigateToAuth }) => {
         </div>
       </div>
       <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <ScrambledText
-          className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:from-cyan-400 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-75 transition-all duration-300 transform hover:scale-105 text-2xl"
-          radius={100}
-          duration={1.2}
-          speed={0.5}
-          scrambleChars=".:"
-        >
-          Register for CloneFest
-        </ScrambledText>
+        <div onClick={onNavigateToAuth} className="cursor-pointer">
+          <ScrambledText
+            className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:from-cyan-400 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-75 transition-all duration-300 transform hover:scale-105 text-2xl"
+            radius={100}
+            duration={1.2}
+            speed={0.5}
+            scrambleChars=".:"
+          >
+            Register for CloneFest
+          </ScrambledText>
+        </div>
       </div>
     </section>
   );
 };
-import CountUp from './CountUp';
 
 

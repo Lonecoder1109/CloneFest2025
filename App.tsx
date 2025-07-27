@@ -55,18 +55,26 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-slate-950 text-white overflow-hidden">
       {/* Background animation component */}
-      <Squares />
+      <Squares 
+        speed={0.5} 
+        squareSize={40}
+        direction='diagonal'
+        borderColor='rgba(148, 163, 184, 0.15)'
+        hoverFillColor='rgba(148, 163, 184, 0.05)'
+      />
 
       {/* Main application components */}
-      <Header
-        onNavigateToAuth={handleNavigateToAuth}
-        onNavigateToAdmin={handleNavigateToAdmin}
-      />
-      <Hero />
-      <About />
-      <WhyParticipate />
-      <Timeline />
-      <Footer />
+      <div className="relative z-10">
+        <Header
+          onNavigateToAuth={handleNavigateToAuth}
+          onNavigateToAdmin={handleNavigateToAdmin}
+        />
+        <Hero onNavigateToAuth={handleNavigateToAuth} />
+        <About />
+        <WhyParticipate />
+        <Timeline />
+        <Footer />
+      </div>
     </div>
   );
 };
