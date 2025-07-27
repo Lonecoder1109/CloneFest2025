@@ -6,14 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "start": "cd server && node server.js",
-    "build:full": "npm run build && cd server && npm install",
-    "dev:server": "cd server && node server.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@react-three/fiber": "^9.2.0",
     "@react-three/postprocessing": "^3.0.4",
+    "dotenv": "^17.2.1",
+    "firebase": "^10.7.1",
+    "firebase-admin": "^12.0.0",
     "framer-motion": "^12.23.9",
     "gsap": "^3.13.0",
     "postprocessing": "^6.37.6",
