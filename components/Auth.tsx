@@ -197,6 +197,18 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                 >
                   Login
                 </button>
+                <div className="text-center mt-4">
+                  <button
+                    type="button"
+                    className="text-sm text-slate-400 hover:text-cyan-400 transition-colors duration-300 underline"
+                    onClick={() => {
+                      // TODO: Implement forgot password functionality
+                      alert("Forgot password functionality coming soon!");
+                    }}
+                  >
+                    Forgot Password?
+                  </button>
+                </div>
               </>
             )}
           </form>
