@@ -8,6 +8,7 @@ import { Auth } from "./components/Auth";
 import { AdminLogin } from "./components/admin/AdminLogin";
 import { AdminDashboard } from "./components/admin/AdminDashboard";
 import Squares from "./components/Squares";
+import { GridBackground } from "./components/GridBackground";
 
 const App: React.FC = () => {
   // State management for different views
@@ -55,6 +56,7 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-slate-950 text-white overflow-hidden">
       {/* Background animation component */}
+      <GridBackground />
       <Squares />
 
       {/* Main application components */}
@@ -62,7 +64,7 @@ const App: React.FC = () => {
         onNavigateToAuth={handleNavigateToAuth}
         onNavigateToAdmin={handleNavigateToAdmin}
       />
-      <Hero />
+      <Hero onNavigateToAuth={handleNavigateToAuth} />
       <About />
       <WhyParticipate />
       <Timeline />

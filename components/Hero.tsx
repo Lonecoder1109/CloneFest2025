@@ -1,6 +1,7 @@
 import React from 'react';
 import BlurText from './BlurText';
 import ScrambledText from './ScrambledText';
+import CountUp from './CountUp';
 
 interface HeroProps {
   onNavigateToAuth: () => void;
@@ -50,6 +51,5 @@ export const Hero: React.FC<HeroProps> = ({ onNavigateToAuth }) => {
     </section>
   );
 };
-import CountUp from './CountUp';
 
 
