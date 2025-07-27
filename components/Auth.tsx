@@ -41,6 +41,8 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
     teamMember2Email: "",
     teamMember3: "",
     teamMember3Email: "",
+    teamMember4: "",
+    teamMember4Email: "",
     teamPassword: "",
   });
 
@@ -105,7 +107,7 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
             </h2>
             <p className="text-slate-400 mt-2">
               {mode === "signup"
-                ? "Register your team for CloneFest 2025 (4 members required)."
+                ? "Register your team for CloneFest 2025 (3-4 members required)."
                 : "Login with your team credentials."}
             </p>
           </div>
@@ -176,34 +178,14 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                         id="teamMember1"
                         name="teamMember1"
                         type="text"
-                        placeholder="Member 1 Name"
-                        label="Team Member 1"
-                        required
-                        onChange={handleInputChange}
-                      />
-                      <FormInput
-                        id="teamMember1Email"
-                        name="teamMember1Email"
-                        type="email"
-                        placeholder="member1@example.com"
-                        label="Member 1 Email"
-                        required
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <FormInput
-                        id="teamMember2"
-                        name="teamMember2"
-                        type="text"
                         placeholder="Member 2 Name"
                         label="Team Member 2"
                         required
                         onChange={handleInputChange}
                       />
                       <FormInput
-                        id="teamMember2Email"
-                        name="teamMember2Email"
+                        id="teamMember1Email"
+                        name="teamMember1Email"
                         type="email"
                         placeholder="member2@example.com"
                         label="Member 2 Email"
@@ -213,8 +195,8 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <FormInput
-                        id="teamMember3"
-                        name="teamMember3"
+                        id="teamMember2"
+                        name="teamMember2"
                         type="text"
                         placeholder="Member 3 Name"
                         label="Team Member 3"
@@ -222,12 +204,32 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                         onChange={handleInputChange}
                       />
                       <FormInput
-                        id="teamMember3Email"
-                        name="teamMember3Email"
+                        id="teamMember2Email"
+                        name="teamMember2Email"
                         type="email"
                         placeholder="member3@example.com"
                         label="Member 3 Email"
                         required
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <FormInput
+                        id="teamMember3"
+                        name="teamMember3"
+                        type="text"
+                        placeholder="Member 4 Name (Optional)"
+                        label="Team Member 4 (Optional)"
+                        required={false}
+                        onChange={handleInputChange}
+                      />
+                      <FormInput
+                        id="teamMember3Email"
+                        name="teamMember3Email"
+                        type="email"
+                        placeholder="member4@example.com"
+                        label="Member 4 Email (Optional)"
+                        required={false}
                         onChange={handleInputChange}
                       />
                     </div>
