@@ -1,25 +1,7 @@
 {
   "functions": {
-    "api/register.js": {
-      "runtime": "@vercel/node"
-    },
-    "api/login.js": {
-      "runtime": "@vercel/node"
-    },
-    "api/admin-login.js": {
-      "runtime": "@vercel/node"
-    },
-    "api/export-users.js": {
-      "runtime": "@vercel/node"
-    },
-    "api/forgot-password.js": {
-      "runtime": "@vercel/node"
-    },
-    "api/verify-otp.js": {
-      "runtime": "@vercel/node"
-    },
-    "api/reset-password.js": {
-      "runtime": "@vercel/node"
+    "api/**/*.js": {
+      "runtime": "@vercel/node@5.3.7"
     }
   }
 }
