@@ -44,19 +44,31 @@ export const Timeline: React.FC = () => {
                     number={2}
                     date="31st Aug - 6th Sept"
                     title="Week 1: Project Alpha"
-                    description="Kick off CloneFest with the first legacy project. Focus on understanding the existing architecture and planning your revamp strategy."
+                    description="Kick off CloneFest with the first legacy project. Focus on understanding the existing architecture, planning your revamp strategy, and deploy your completed application."
                 />
                 <TimelineItem
                     number={3}
                     date="7th Sept - 13th Sept"
                     title="Week 2: Project Beta"
-                    description="Tackle the second project. This week introduces more complexity, challenging you to integrate new features and optimize performance."
+                    description="Tackle the second project with increased complexity. Integrate new features, optimize performance, and deploy your second application."
                 />
                 <TimelineItem
                     number={4}
                     date="14th Sept - 21st Sept"
-                    title="Week 3: Project Gamma & Deployment"
-                    description="The final challenge. Finalize your third project and deploy all three applications. Submissions will be judged after this week."
+                    title="Week 3: Project Gamma & Final Submissions"
+                    description="The final challenge. Complete and deploy your third project. All three deployed applications will be submitted for evaluation."
+                />
+                <TimelineItem
+                    number={5}
+                    date="22nd Sept - 29th Sept"
+                    title="Judging Phase"
+                    description="Expert judges will evaluate all submitted projects based on code quality, innovation, deployment, and adherence to requirements. Finalists will be shortlisted during this phase."
+                />
+                <TimelineItem
+                    number={6}
+                    date="30th Sept"
+                    title="Results & Winner Announcement"
+                    description="The moment you've been waiting for! Winners will be announced and prize distribution will take place. Best projects will be featured on the Coding Club GitHub."
                     isLast={true}
                 />
             </div>
