@@ -56,19 +56,7 @@ export const Timeline: React.FC = () => {
                     number={4}
                     date="14th Sept - 21st Sept"
                     title="Week 3: Project Gamma & Final Submissions"
-                    description="The final challenge. Complete and deploy your third project. All three deployed applications will be submitted for evaluation."
-                />
-                <TimelineItem
-                    number={5}
-                    date="22nd Sept - 29th Sept"
-                    title="Judging Phase"
-                    description="Expert judges will evaluate all submitted projects based on code quality, innovation, deployment, and adherence to requirements. Finalists will be shortlisted during this phase."
-                />
-                <TimelineItem
-                    number={6}
-                    date="30th Sept"
-                    title="Results & Winner Announcement"
-                    description="The moment you've been waiting for! Winners will be announced and prize distribution will take place. Best projects will be featured on the Coding Club GitHub."
+                    description="The final challenge. Complete and deploy your third project. All three deployed applications will be judged for the final evaluation."
                     isLast={true}
                 />
             </div>
