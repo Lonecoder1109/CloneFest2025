@@ -38,7 +38,7 @@ interface HeaderProps {
   onNavigateToAdmin: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onNavigateToAuth }) => {
+export const Header: React.FC<HeaderProps> = ({ onNavigateToAuth, onNavigateToAdmin }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
