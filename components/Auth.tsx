@@ -32,16 +32,10 @@ interface AuthProps {
 export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
   const [mode, setMode] = useState<"login" | "signup">("signup");
   const [formData, setFormData] = useState({
-    teamName: "",
-    teamLeader: "",
-    teamLeaderEmail: "",
-    teamMember1: "",
-    teamMember1Email: "",
-    teamMember2: "",
-    teamMember2Email: "",
-    teamMember3: "",
-    teamMember3Email: "",
-    teamPassword: "",
+    fullName: "",
+    email: "",
+    github: "",
+    password: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +49,7 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
     const payload =
       mode === "signup"
         ? formData
-        : { teamName: formData.teamName, teamPassword: formData.teamPassword };
+        : { email: formData.email, password: formData.password };
 
     try {
       const response = await fetch(`/api${endpoint}`, {
@@ -101,12 +95,12 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
         <div className="bg-slate-800/20 backdrop-blur-2xl border border-slate-700/30 rounded-2xl p-8 md:p-12 shadow-2xl hover:bg-slate-800/25 transition-all duration-300">
           <div className="mb-8 text-center">
             <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-white uppercase">
-              {mode === "signup" ? "Register Your Team" : "Team Login"}
+              {mode === "signup" ? "Join CloneFest 2025" : "Welcome Back"}
             </h2>
             <p className="text-slate-400 mt-2">
               {mode === "signup"
-                ? "Register your team for CloneFest 2025 (4 members required)."
-                : "Login with your team credentials."}
+                ? "Create an account to begin your journey."
+                : "Login to access your details."}
             </p>
           </div>
 
@@ -119,7 +113,7 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                   : "text-slate-300 hover:bg-slate-700/30"
               }`}
             >
-              Register Team
+              Sign Up
             </button>
             <button
               onClick={() => setMode("login")}
@@ -129,7 +123,7 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                   : "text-slate-300 hover:bg-slate-700/30"
               }`}
             >
-              Team Login
+              Login
             </button>
           </div>
 
@@ -137,108 +131,38 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
             {mode === "signup" ? (
               <>
                 <FormInput
-                  id="teamName"
-                  name="teamName"
+                  id="fullName"
+                  name="fullName"
                   type="text"
-                  placeholder="Team Alpha"
-                  label="Team Name"
+                  placeholder="John Doe"
+                  label="Full Name"
                   required
                   onChange={handleInputChange}
                 />
-                <div className="border-t border-slate-700/30 pt-4">
-                  <h3 className="text-lg font-bold text-white mb-4">Team Leader</h3>
-                  <div className="space-y-4">
-                    <FormInput
-                      id="teamLeader"
-                      name="teamLeader"
-                      type="text"
-                      placeholder="John Doe"
-                      label="Team Leader Name"
-                      required
-                      onChange={handleInputChange}
-                    />
-                    <FormInput
-                      id="teamLeaderEmail"
-                      name="teamLeaderEmail"
-                      type="email"
-                      placeholder="leader@example.com"
-                      label="Team Leader Email"
-                      required
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </div>
-                <div className="border-t border-slate-700/30 pt-4">
-                  <h3 className="text-lg font-bold text-white mb-4">Team Members</h3>
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <FormInput
-                        id="teamMember1"
-                        name="teamMember1"
-                        type="text"
-                        placeholder="Member 1 Name"
-                        label="Team Member 1"
-                        required
-                        onChange={handleInputChange}
-                      />
-                      <FormInput
-                        id="teamMember1Email"
-                        name="teamMember1Email"
-                        type="email"
-                        placeholder="member1@example.com"
-                        label="Member 1 Email"
-                        required
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <FormInput
-                        id="teamMember2"
-                        name="teamMember2"
-                        type="text"
-                        placeholder="Member 2 Name"
-                        label="Team Member 2"
-                        required
-                        onChange={handleInputChange}
-                      />
-                      <FormInput
-                        id="teamMember2Email"
-                        name="teamMember2Email"
-                        type="email"
-                        placeholder="member2@example.com"
-                        label="Member 2 Email"
-                        required
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <FormInput
-                        id="teamMember3"
-                        name="teamMember3"
-                        type="text"
-                        placeholder="Member 3 Name"
-                        label="Team Member 3"
-                        required
-                        onChange={handleInputChange}
-                      />
-                      <FormInput
-                        id="teamMember3Email"
-                        name="teamMember3Email"
-                        type="email"
-                        placeholder="member3@example.com"
-                        label="Member 3 Email"
-                        required
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                  </div>
-                </div>
                 <FormInput
-                  id="teamPassword"
-                  name="teamPassword"
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  label="Email Address"
+                  required
+                  onChange={handleInputChange}
+                />
+                <FormInput
+                  id="github"
+                  name="github"
+                  type="url"
+                  placeholder="https://github.com/johndoe"
+                  label="GitHub Profile URL"
+                  required
+                  onChange={handleInputChange}
+                />
+                <FormInput
+                  id="password"
+                  name="password"
                   type="password"
                   placeholder="••••••••"
-                  label="Team Password"
+                  label="Password"
                   required
                   onChange={handleInputChange}
                 />
@@ -246,32 +170,32 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                   type="submit"
                   className="w-full text-center block px-8 py-4 font-bold rounded-lg transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg hover:from-cyan-400 hover:to-blue-500 transform hover:scale-105"
                 >
-                  Register Team
+                  Create Account
                 </button>
               </>
             ) : (
               <>
                 <FormInput
-                  id="login-teamName"
-                  name="teamName"
-                  type="text"
-                  placeholder="Team Alpha"
-                  label="Team Name"
+                  id="login-email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  label="Email Address"
                   onChange={handleInputChange}
                 />
                 <FormInput
-                  id="login-teamPassword"
-                  name="teamPassword"
+                  id="login-password"
+                  name="password"
                   type="password"
                   placeholder="••••••••"
-                  label="Team Password"
+                  label="Password"
                   onChange={handleInputChange}
                 />
                 <button
                   type="submit"
                   className="w-full text-center block px-8 py-4 font-bold rounded-lg transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg hover:from-cyan-400 hover:to-blue-500 transform hover:scale-105"
                 >
-                  Team Login
+                  Login
                 </button>
                 <div className="text-center mt-4">
                   <button
