@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 const FormInput: React.FC<{ id: string; name: string; type: string; placeholder: string; label: string; }> = ({ id, name, type, placeholder, label }) => (
@@ -32,10 +31,12 @@ export const Register: React.FC = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <FormInput id="fullName" name="fullName" type="text" placeholder="John Doe" label="Full Name" />
                             <FormInput id="email" name="email" type="email" placeholder="you@example.com" label="Email Address" />
+                            <FormInput id="usn" name="usn" type="text" placeholder="1RV23CS001" label="University Seat Number (USN)" />
                         </div>
+
                         <FormInput id="github" name="github" type="url" placeholder="https://github.com/johndoe" label="GitHub Profile URL" />
-                         <FormInput id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/johndoe" label="LinkedIn Profile URL (Optional)" />
-                        
+                        <FormInput id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/johndoe" label="LinkedIn Profile URL (Optional)" />
+
                         <div className="flex items-start">
                             <div className="flex items-center h-5">
                                 <input
@@ -62,7 +63,8 @@ export const Register: React.FC = () => {
                         >
                             Register as a Participant
                         </a>
-                         <p className="text-center text-xs text-slate-500 pt-2">
+
+                        <p className="text-center text-xs text-slate-500 pt-2">
                             *This is a placeholder form. Clicking the button will redirect to the actual Google Form for registration.
                         </p>
                     </form>

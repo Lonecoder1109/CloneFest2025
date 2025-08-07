@@ -67,14 +67,15 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
     teamPassword: "",
     teamLeader: {
       fullName: "",
+      USN:"",
       email: "",
       phone: "",
       github: "",
     },
     teamMembers: [
-      { fullName: "", usn: "", email: "" }, 
-      { fullName: "", usn: "", email: "" }, 
-      { fullName: "", usn: "", email: "" }
+      { fullName: "", USN: "", email: "" }, 
+      { fullName: "", USN: "", email: "" }, 
+      { fullName: "", USN: "", email: "" }
     ],
   });
 
@@ -244,6 +245,15 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                       label="Team Leader Name"
                       onChange={handleChange}
                     />
+                    <FormInput
+                      id="leader-usn"
+                      name="leader-usn"
+                      type="text"
+                      placeholder="1RV24XX001"
+                      label="Team Leader USN"
+                      onChange={handleChange}
+                    />
+
                     <FormInput
                       id="leader-email"
                       name="leader-email"

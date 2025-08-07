@@ -42,11 +42,16 @@ export default async function handler(req, res) {
       !teamName?.trim() ||
       !teamPassword?.trim() ||
       !teamLeader?.fullName?.trim() ||
+      !teamLeader?.USN?.trim() ||
       !teamLeader?.email?.trim() ||
       !teamLeader?.phone?.trim() ||
       !teamLeader?.github?.trim() ||
       !teamMembers[0]?.fullName?.trim() ||
-      !teamMembers[1]?.fullName?.trim()
+      !teamMembers[0]?.USN?.trim() ||
+      !teamMembers[0]?.email?.trim() ||
+      !teamMembers[1]?.fullName?.trim() || 
+      !teamMembers[1]?.USN?.trim() ||
+      !teamMembers[1]?.email?.trim()
     ) {
       return res.status(400).json({ message: "All required fields must be filled." });
     }
@@ -70,12 +75,15 @@ export default async function handler(req, res) {
       teamPassword: hashedPassword,
       teamLeader: {
         fullName: teamLeader.fullName.trim(),
+        USN: teamLeader.USN.trim(),
         email: teamLeader.email.trim(),
         phone: teamLeader.phone.trim(),
         github: teamLeader.github.trim(),
       },
       teamMembers: teamMembers.map((m) => ({
         fullName: m.fullName?.trim() || "",
+        USN: m.USN?.trim() || "",
+        email: m.email?.trim() || "",
       })),
       createdAt: new Date().toISOString(),
     });
