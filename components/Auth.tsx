@@ -256,7 +256,7 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                       id="leader-phone"
                       name="leader-phone"
                       type="tel"
-                      placeholder="xxx-xxx-xxxx"
+                      placeholder="+91-xxxxxxxxxx"
                       label="Team Leader Phone"
                       onChange={handleChange}
                     />

@@ -28,7 +28,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigateToAuth }) => {
       />
       <div className="mt-8 max-w-3xl mx-auto text-center">
         <div className="mb-2 text-lg md:text-xl font-bold text-white font-orbitron leading-tight">
-          Join CloneFest 2025, a 3-week coding marathon to transform legacy systems into modern, full-stack applications.
+          Join CloneFest 2025, a 3-week coding marathon to transform legacy systems into modern, full-stack applications. <span className="text-cyan-400">Exclusive to first-year students.</span>
         </div>
         <div className="mb-2 text-lg md:text-xl font-bold text-cyan-400 font-orbitron leading-tight">
           Win from a ₹<span className="inline-block"><CountUp to={6000} duration={2.5} separator="," className="font-orbitron" /></span> prize pool — <span className="text-white">build major projects for your resume.</span>
