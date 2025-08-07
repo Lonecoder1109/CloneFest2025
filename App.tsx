@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,6 +18,12 @@ import Squares from "./components/Squares";
 const App: React.FC = () => {
   const [adminToken, setAdminToken] = useState<string | null>(null);
 
+  // ✅ Restore token on app load
+  useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    if (token) setAdminToken(token);
+  }, []);
+
   // Navigation handlers
   const handleNavigateToAuth = () => {
     window.location.href = "/auth";
@@ -33,12 +39,14 @@ const App: React.FC = () => {
 
   // Admin login success handler
   const handleAdminLogin = (token: string) => {
+    localStorage.setItem("adminToken", token); // ✅ persist token
     setAdminToken(token);
     window.location.href = "/admin";
   };
 
   // Admin logout
   const handleAdminLogout = () => {
+    localStorage.removeItem("adminToken"); // ✅ clear token
     setAdminToken(null);
     window.location.href = "/";
   };
