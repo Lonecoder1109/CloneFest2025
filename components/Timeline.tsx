@@ -60,9 +60,9 @@ export const Timeline: React.FC = () => {
                 />
                 <TimelineItem
                     number={5}
-                    date="22nd Sept - 29th Sept"
-                    title="Judging Phase"
-                    description="Expert judges will evaluate all submitted projects based on code quality, innovation, deployment, and adherence to requirements. Finalists will be shortlisted during this phase."
+                    date="Continuous Throughout"
+                    title="Continuous Judging & Feedback"
+                    description="Expert judges evaluate projects after each round, providing valuable feedback and comments to help students improve. Judging happens continuously throughout the competition to ensure timely guidance and assessment."
                 />
                 <TimelineItem
                     number={6}
