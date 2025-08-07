@@ -1,5 +1,6 @@
 import admin from "firebase-admin";
 
+// Initialize Firebase Admin SDK
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert({
@@ -57,12 +58,23 @@ export default async function handler(req, res) {
         teamName: data.teamName,
         teamPassword: data.teamPassword,
         teamLeaderFullName: data.teamLeader?.fullName || "",
+        teamLeaderUSN: data.teamLeader?.USN || "",
         teamLeaderEmail: data.teamLeader?.email || "",
         teamLeaderPhone: data.teamLeader?.phone || "",
         teamLeaderGithub: data.teamLeader?.github || "",
-        member1: data.teamMembers?.[0]?.fullName || "",
-        member2: data.teamMembers?.[1]?.fullName || "",
-        member3: data.teamMembers?.[2]?.fullName || "",
+
+        member1FullName: data.teamMembers?.[0]?.fullName || "",
+        member1USN: data.teamMembers?.[0]?.USN || "",
+        member1Email: data.teamMembers?.[0]?.email || "",
+
+        member2FullName: data.teamMembers?.[1]?.fullName || "",
+        member2USN: data.teamMembers?.[1]?.USN || "",
+        member2Email: data.teamMembers?.[1]?.email || "",
+
+        member3FullName: data.teamMembers?.[2]?.fullName || "",
+        member3USN: data.teamMembers?.[2]?.USN || "",
+        member3Email: data.teamMembers?.[2]?.email || "",
+
         createdAt: data.createdAt,
       });
     });
@@ -71,12 +83,11 @@ export default async function handler(req, res) {
 
     if (format === "csv") {
       const csvHeader =
-        "ID,Team Name,Team Password,Leader Name,Leader Email,Leader Phone,Leader GitHub,Member 1,Member 2,Member 3,Created At\n";
+        "ID,Team Name,Team Password,Leader Name,Leader Email,Leader Phone,Leader GitHub,Member 1 Name,Member 1 USN,Member 1 Email,Member 2 Name,Member 2 USN,Member 2 Email,Member 3 Name,Member 3 USN,Member 3 Email,Created At\n";
 
       const csvRows = teams
-        .map(
-          (team) =>
-            `"${team.id}","${team.teamName}","${team.teamPassword}","${team.teamLeaderFullName}","${team.teamLeaderEmail}","${team.teamLeaderPhone}","${team.teamLeaderGithub}","${team.member1}","${team.member2}","${team.member3}","${team.createdAt}"`
+        .map((team) =>
+          `"${team.id}","${team.teamName}","${team.teamPassword}","${team.teamLeaderFullName}","${team.teamLeaderEmail}","${team.teamLeaderPhone}","${team.teamLeaderGithub}","${team.member1FullName}","${team.member1USN}","${team.member1Email}","${team.member2FullName}","${team.member2USN}","${team.member2Email}","${team.member3FullName}","${team.member3USN}","${team.member3Email}","${team.createdAt}"`
         )
         .join("\n");
 
