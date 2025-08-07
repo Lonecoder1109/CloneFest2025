@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { About, WhyParticipate } from "./components/About";
@@ -14,7 +10,6 @@ import { Auth } from "./components/Auth";
 import { AdminLogin } from "./components/admin/AdminLogin";
 import { AdminDashboard } from "./components/admin/AdminDashboard";
 import Squares from "./components/Squares";
-import { useNavigate } from "react-router-dom";
 
 const App: React.FC = () => {
   const [adminToken, setAdminToken] = useState<string | null>(null);
@@ -70,37 +65,35 @@ const App: React.FC = () => {
   );
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route
-          path="/auth"
-          element={<Auth onNavigateHome={handleNavigateHome} />}
-        />
-        <Route
-          path="/login"
-          element={
-            <AdminLogin
-              onAdminLogin={handleAdminLogin}
-              onBack={handleNavigateHome}
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route
+        path="/auth"
+        element={<Auth onNavigateHome={handleNavigateHome} />}
+      />
+      <Route
+        path="/login"
+        element={
+          <AdminLogin
+            onAdminLogin={handleAdminLogin}
+            onBack={handleNavigateHome}
+          />
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          adminToken ? (
+            <AdminDashboard
+              adminToken={adminToken}
+              onLogout={handleAdminLogout}
             />
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            adminToken ? (
-              <AdminDashboard
-                adminToken={adminToken}
-                onLogout={handleAdminLogout}
-              />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      </Routes>
-    </Router>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+    </Routes>
   );
 };
 
