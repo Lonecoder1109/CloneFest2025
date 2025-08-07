@@ -90,7 +90,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               disabled={loading}
               className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
             >
-              {loading ? "Exporting..." : "Export as CSV"}
+              {loading ? "Exporting...." : "Export as CSV"}
             </button>
 
             <button
