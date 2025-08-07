@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { About, WhyParticipate } from "./components/About";
@@ -10,75 +16,80 @@ import { AdminDashboard } from "./components/admin/AdminDashboard";
 import Squares from "./components/Squares";
 
 const App: React.FC = () => {
-  const [view, setView] = useState<"main" | "auth" | "admin-login" | "admin-dashboard">("main");
-
-
   const [adminToken, setAdminToken] = useState<string | null>(null);
 
   // Navigation handlers
-  const handleNavigateToAuth = () => setView("auth");
-  const handleNavigateHome = () => setView("main");
-  const handleNavigateToAdmin = () => setView("admin-login");
+  const handleNavigateToAuth = () => {
+    window.location.href = "/auth";
+  };
+
+  const handleNavigateHome = () => {
+    window.location.href = "/";
+  };
+
+  const handleNavigateToAdmin = () => {
+    window.location.href = "/login";
+  };
 
   // Admin login success handler
   const handleAdminLogin = (token: string) => {
     setAdminToken(token);
-    setView("admin-dashboard");
+    window.location.href = "/admin";
   };
 
   // Admin logout
   const handleAdminLogout = () => {
     setAdminToken(null);
-    setView("main");
+    window.location.href = "/";
   };
 
-  // Admin login view
-  if (view === "admin-login") {
-    return (
-      <AdminLogin
-        onAdminLogin={handleAdminLogin}
-        onBack={handleNavigateHome}
-      />
-    );
-  }
-
-  // Admin dashboard view
-  if (view === "admin-dashboard" && adminToken) {
-    return (
-      <AdminDashboard adminToken={adminToken} onLogout={handleAdminLogout} />
-    );
-  }
-
-  // Auth view (signup / login)
-  if (view === "auth") {
-    return <Auth onNavigateHome={handleNavigateHome} />;
-  }
-
-  // Main site landing view
-  return (
-    <div className="relative min-h-screen bg-slate-950 text-white overflow-hidden">
+  // Main site landing component
+  const MainPage = () => (
+    <>
       {/* Animated background */}
-      <Squares
-        speed={0.5}
-        squareSize={40}
-        direction="diagonal"
-        borderColor="rgba(148, 163, 184, 0.15)"
-        hoverFillColor="rgba(148, 163, 184, 0.05)"
-      />
-
+      <Squares />
       {/* Main site content */}
-      <div className="relative z-10">
-        <Header
-          onNavigateToAuth={handleNavigateToAuth}
-          onNavigateToAdmin={handleNavigateToAdmin}
+      <Header onNavigateToAuth={handleNavigateToAuth} />
+      <Hero onNavigateToAuth={handleNavigateToAuth} />
+      <About />
+      <WhyParticipate />
+      <Timeline />
+      <Footer onNavigateToAdmin={handleNavigateToAdmin} />
+    </>
+  );
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route
+          path="/auth"
+          element={<Auth onNavigateHome={handleNavigateHome} />}
         />
-        <Hero onNavigateToAuth={handleNavigateToAuth} />
-        <About />
-        <WhyParticipate />
-        <Timeline />
-        <Footer />
-      </div>
-    </div>
+        <Route
+          path="/login"
+          element={
+            <AdminLogin
+              onAdminLogin={handleAdminLogin}
+              onBack={handleNavigateHome}
+            />
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            adminToken ? (
+              <AdminDashboard
+                adminToken={adminToken}
+                onLogout={handleAdminLogout}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      </Routes>
+    </Router>
   );
 };
 

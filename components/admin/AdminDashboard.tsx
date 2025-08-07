@@ -6,8 +6,9 @@ interface AdminDashboardProps {
 }
 
 interface UserStats {
-  totalUsers: number;
-  recentUsers: any[];
+  totalTeams: number;
+  recentTeams: any[];
+  teams: any[];
 }
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
@@ -32,7 +33,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           const url = window.URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
-          a.download = `clonefest-users-${
+          a.download = `clonefest-teams-${
             new Date().toISOString().split("T")[0]
           }.csv`;
           document.body.appendChild(a);
@@ -43,7 +44,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         } else {
           const data = await response.json();
           setStats(data);
-          alert(`Exported ${data.totalUsers} users successfully!`);
+          alert(`Exported ${data.totalTeams} teams successfully!`);
         }
       } else {
         const errorData = await response.json();
@@ -58,11 +59,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
+            <h1 className="text-3xl font-bold text-white mb-2">
+              Admin Dashboard
+            </h1>
             <p className="text-slate-400">CloneFest 2025 - Data Management</p>
           </div>
           <button
@@ -73,12 +76,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </button>
         </div>
 
-        <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-6 mb-6">
-          <h2 className="text-xl font-bold text-white mb-4">
-            Export User Data
+        <div className="bg-slate-800/50 rounded-lg p-8 mb-8">
+          <h2 className="text-xl font-semibold text-white mb-4">
+            Export Team Data
           </h2>
           <p className="text-slate-400 mb-6">
-            Download all registered users data in your preferred format.
+            Download all registered teams data in your preferred format.
           </p>
 
           <div className="flex gap-4">
@@ -101,30 +104,32 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         </div>
 
         {stats && (
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-6">
-            <h2 className="text-xl font-bold text-white mb-4">
+          <div className="bg-slate-800/50 rounded-lg p-8">
+            <h3 className="text-xl font-semibold text-white mb-4">
               Export Results
-            </h2>
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-slate-700/50 p-4 rounded-lg">
-                <h3 className="text-cyan-400 font-semibold">Total Users</h3>
+              <div className="bg-slate-700/50 rounded-lg p-4">
+                <h4 className="text-slate-300 text-sm">Total Teams</h4>
                 <p className="text-2xl font-bold text-white">
-                  {stats.totalUsers}
+                  {stats.totalTeams}
                 </p>
               </div>
-              <div className="bg-slate-700/50 p-4 rounded-lg">
-                <h3 className="text-green-400 font-semibold">Export Date</h3>
-                <p className="text-white">{new Date().toLocaleDateString()}</p>
+              <div className="bg-slate-700/50 rounded-lg p-4">
+                <h4 className="text-slate-300 text-sm">Export Date</h4>
+                <p className="text-lg text-white">
+                  {new Date().toLocaleDateString()}
+                </p>
               </div>
-              <div className="bg-slate-700/50 p-4 rounded-lg">
-                <h3 className="text-blue-400 font-semibold">Format</h3>
-                <p className="text-white">JSON</p>
+              <div className="bg-slate-700/50 rounded-lg p-4">
+                <h4 className="text-slate-300 text-sm">Format</h4>
+                <p className="text-lg text-white">JSON</p>
               </div>
             </div>
 
-            <div className="bg-slate-900/50 p-4 rounded-lg max-h-96 overflow-y-auto">
-              <pre className="text-sm text-slate-300">
-                {JSON.stringify(stats.users, null, 2)}
+            <div className="bg-slate-900 rounded-lg p-4 overflow-auto max-h-96">
+              <pre className="text-green-400 text-sm">
+                {JSON.stringify(stats.teams, null, 2)}
               </pre>
             </div>
           </div>
