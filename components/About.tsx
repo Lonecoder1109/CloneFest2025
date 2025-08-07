@@ -55,7 +55,7 @@ export const About: React.FC = () => {
                 <FeatureCard 
                     icon={<UserGroupIcon />}
                     title="Expert Judging & Recognition"
-                    description="Projects are reviewed by senior developers. Top submissions get recognized and have the chance to be pushed as open-source contributions."
+                    description="Projects are reviewed by senior developers from RVCE. Top submissions get recognized and have the chance to be pushed as open-source contributions."
                 />
             </div>
         </section>
@@ -77,7 +77,7 @@ export const WhyParticipate: React.FC = () => {
                 />
                 <div className="mt-4">
                     <BlurText
-                        text="Build major projects for your resume, and get your best clones featured on the Coding Club GitHub account with credits to your team."
+                        text="Build major projects for your resume, and get your best clones featured on the RVCE Coding Club GitHub account with credits to your team."
                         delay={100}
                         animateBy="words"
                         direction="top"
@@ -119,7 +119,7 @@ export const WhyParticipate: React.FC = () => {
                         ₹<span className="inline-block"><CountUp to={6000} duration={2.5} separator="," className="font-orbitron" /></span>
                     </div>
                     <p className="font-inter text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
-                        Compete for exciting cash prizes! The top performers will share the grand prize pool based on their project quality, innovation, and successful deployment.
+                        Compete for exciting cash prizes! The top performers will share the grand prize pool based on their project quality, innovation, and successful deployment and other factors.
                     </p>
                 </div>
             </div>
