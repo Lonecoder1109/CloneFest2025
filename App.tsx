@@ -14,6 +14,9 @@ import { Auth } from "./components/Auth";
 import { AdminLogin } from "./components/admin/AdminLogin";
 import { AdminDashboard } from "./components/admin/AdminDashboard";
 import Squares from "./components/Squares";
+import { useNavigate } from "react-router-dom";
+
+const navigate = useNavigate();
 
 const App: React.FC = () => {
   const [adminToken, setAdminToken] = useState<string | null>(null);
@@ -41,7 +44,7 @@ const App: React.FC = () => {
   const handleAdminLogin = (token: string) => {
     localStorage.setItem("adminToken", token); // ✅ persist token
     setAdminToken(token);
-    window.location.href = "/admin";
+    navigate("/admin");
   };
 
   // Admin logout
