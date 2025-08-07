@@ -16,10 +16,10 @@ import { AdminDashboard } from "./components/admin/AdminDashboard";
 import Squares from "./components/Squares";
 import { useNavigate } from "react-router-dom";
 
-const navigate = useNavigate();
-
 const App: React.FC = () => {
   const [adminToken, setAdminToken] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   // ✅ Restore token on app load
   useEffect(() => {
