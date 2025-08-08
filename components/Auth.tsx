@@ -238,7 +238,7 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                     />
                     <FormInput
                       id="leader-usn"
-                      name="leader-usn"
+                      name="leader-USN"
                       type="text"
                       placeholder="1RV24XX001"
                       label="Team Leader USN"
@@ -292,7 +292,7 @@ export const Auth: React.FC<AuthProps> = ({ onNavigateHome }) => {
                         />
                         <FormInput
                           id={`member-${i}-usn`}
-                          name={`member-${i}-usn`}
+                          name={`member-${i}-USN`}
                           type="text"
                           placeholder="1RV24XX001"
                           label="USN"
